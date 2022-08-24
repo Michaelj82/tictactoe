@@ -13,27 +13,57 @@
 
 </head>
 <body>
+
+
+    <div id="game">
+        <div id="player1">
+            <h1 id="playerOneHeader">Player 1</h1>
+                <label for="playerOneName">
+                    Enter name here:
+                </label>
+                <input id="playerOneName" type="text">
     
-    <div id="board">
-
-        <div id = "0" class="element" onclick="playerMove(this)"></div>
-        <div id = '1' class="element" onclick="playerMove(this)"></div>
-        <div id = '2' class="element" onclick="playerMove(this)"></div>
-
-        <div id = "3" class="element" onclick="playerMove(this)"></div>
-        <div id = "4" class="element" onclick="playerMove(this)"></div>
-        <div id = "5" class="element" onclick="playerMove(this)"></div>
-
-        <div id = "6" class="element" onclick="playerMove(this)"></div>
-        <div id = "7" class="element" onclick="playerMove(this)"></div>
-        <div id = "8" class="element" onclick="playerMove(this)"></div>
-
+            
+        </div>
+    
+    
+        <div id="board">
+    
+            <div id = "0" class="element" onclick="gameTurn(this)"></div>
+            <div id = '1' class="element" onclick="gameTurn(this)"></div>
+            <div id = '2' class="element" onclick="gameTurn(this)"></div>
+    
+            <div id = "3" class="element" onclick="gameTurn(this)"></div>
+            <div id = "4" class="element" onclick="gameTurn(this)"></div>
+            <div id = "5" class="element" onclick="gameTurn(this)"></div>
+    
+            <div id = "6" class="element" onclick="gameTurn(this)"></div>
+            <div id = "7" class="element" onclick="gameTurn(this)"></div>
+            <div id = "8" class="element" onclick="gameTurn(this)"></div>
+    
+    
+    
+    
+        </div>
+    
+    
+        <div id="player2">
+            <h1 id="playerTwoHeader">Player 2</h1>
+                <label for="playerTwoName">
+                    Enter name here:
+                </label>
+                <input id="playerTwoName" type="text">
+    
+        </div>
 
 
 
     </div>
 
-
+    <div id="startGame">
+        <button id="startGameButton" onclick="startGame()">Start Game!</button>
+        <button onclick="resetGame()">Reset</button>
+    </div>
 
 
 </body>

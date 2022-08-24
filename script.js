@@ -14,9 +14,25 @@ const boardScreen = document.getElementById('board');
 // elements
 const spots = document.querySelectorAll(".element");
 
+//player one input
+let playerOneInput = document.getElementById('playerOneName')
+//player two input
+let playerTwoInput = document.getElementById('playerTwoName')
+
+//player one and two headers
+let playerOneHeader = document.getElementById('playerOneHeader');
+let playerTwoHeader = document.getElementById('playerTwoHeader');
+
+//game start boolean
+let gameStart = false;
+
+// game start button
+let startGameButton = document.getElementById('startGameButton');
+
+
 
 //value to let switching between x and o 
-let turn = false
+let turn = false;
 
 //function to allow switching between x and o
 
@@ -24,9 +40,6 @@ function switchTurn(){
     turn = turn !== true;
 }
 
-
-// width="100%"   stroke="currentColor"  
-// stroke-linejoin="round" ><circle  cy="12" r="10"></circle></svg>
 
 //put elements from board on screen
 
@@ -41,6 +54,8 @@ function updateBoard(){
         }else if (symbol == 'o'){
             spots[i].innerHTML= '<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-circle"><circle cx="12" cy="12" r="10"></circle></svg>'
 
+        }else{
+            spots[i].innerHTML = ''
         }
         
     }
@@ -48,27 +63,116 @@ function updateBoard(){
 };
 
 
-function playerMove(element){
+//player object
 
+const Player = (name, playerTurn, symbol) => {
 
-
-    elementNum = element.id;
-    if (board[elementNum] == ''){
-        if (turn == false){
-            board[elementNum] = 'x'
+    const playerMove = (element) =>{
+        elementNum = element.id;
+        if (board[elementNum] == ''){
+            board[elementNum] = symbol;
             updateBoard()
-            switchTurn()
-        }else{
-            board[elementNum] = 'o'
-            updateBoard()
-            switchTurn()
-        }
-
-    }else{
-        
-    }
+            switchTurn()   
+        };
 
 
     
+    };
+
+    return {name, playerTurn, playerMove}
 }
 
+//makes objects
+const PlayerOne = Player('Player 1', false, 'x');
+const PlayerTwo = Player('Player 2', true, 'o')
+
+
+
+
+
+
+//initializes game
+function startGame(){
+    console.log('bruh')
+    
+
+    let playerOneName = playerOneInput.value;
+    PlayerOne.name = playerOneName
+    let playerTwoName = playerTwoInput.value;
+    PlayerTwo.name = playerTwoName
+    console.log(playerOneName)
+    console.log(playerTwoName)
+
+    if (playerOneName === ''){
+        playerOneName = 'Player 1'
+    }
+    if (playerTwoName === ''){
+        playerTwoName = 'Player 2'
+    }
+
+
+    playerOneHeader.innerHTML = playerOneName;
+    playerTwoHeader.innerHTML = playerTwoName;
+
+    gameStart = true
+
+    playerOneInput.disabled = true;
+    playerTwoInput.disabled = true;
+
+    startGameButton.disabled = true;
+
+}
+
+function resetGame(){
+    gameStart = false
+    turn = false
+    playerOneHeader.innerHTML = 'Player 1'
+    playerTwoHeader.innerHTML = 'Player 2'
+    PlayerOne.name = 'Player 1'
+    PlayerTwo.name = 'Player 2'
+
+    playerOneInput.value = ''
+    playerTwoInput.value = ''
+
+
+    playerOneInput.disabled = false;
+    playerTwoInput.disabled = false;
+
+    startGameButton.disabled = false;
+
+    for (let i = 0; i < board.length; i++){
+        board[i] = ''
+    };
+
+    updateBoard()
+
+    
+
+
+}
+
+
+
+
+
+//basic turn function called
+
+
+function gameTurn(element){
+    //if Start Game button has been pressed
+    if (gameStart == true){
+        if (PlayerOne.playerTurn == turn){
+            PlayerOne.playerMove(element)
+            console.log(PlayerOne.name)
+        }else if (PlayerTwo.playerTurn == turn){
+            PlayerTwo.playerMove(element)
+            console.log(PlayerTwo.name)
+        }
+    //if not, do nothing, dont allow turns
+    }else if (gameStart == false){
+
+    }
+
+
+
+};

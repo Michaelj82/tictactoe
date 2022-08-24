@@ -9,6 +9,13 @@ html, body{
     align-items: center;
 }
 
+#game{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 
 #board{
     margin: 0;
