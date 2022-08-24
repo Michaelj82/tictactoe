@@ -14,11 +14,6 @@ const boardScreen = document.getElementById('board');
 // elements
 const spots = document.querySelectorAll(".element");
 
-//x and o element
-let x = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-
-
-let o = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 
 //value to let switching between x and o 
 let turn = false
@@ -51,6 +46,7 @@ function updateBoard(){
     }
 
 };
+
 
 function playerMove(element){
     elementNum = element.id;
