@@ -49,15 +49,26 @@ function updateBoard(){
 
 
 function playerMove(element){
+
+
+
     elementNum = element.id;
-    if (turn == false){
-        board[elementNum] = 'x'
-        updateBoard()
-        switchTurn()
+    if (board[elementNum] == ''){
+        if (turn == false){
+            board[elementNum] = 'x'
+            updateBoard()
+            switchTurn()
+        }else{
+            board[elementNum] = 'o'
+            updateBoard()
+            switchTurn()
+        }
+
     }else{
-        board[elementNum] = 'o'
-        updateBoard()
-        switchTurn()
+        
     }
+
+
+    
 }
 
