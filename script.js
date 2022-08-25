@@ -72,6 +72,7 @@ const Player = (name, playerTurn, symbol) => {
         if (board[elementNum] == ''){
             board[elementNum] = symbol;
             updateBoard()
+            checkWin()
             switchTurn()   
         };
 
@@ -103,10 +104,10 @@ function startGame(){
     console.log(playerOneName)
     console.log(playerTwoName)
 
-    if (playerOneName === ''){
+    if (playerOneName == ''){
         playerOneName = 'Player 1'
     }
-    if (playerTwoName === ''){
+    if (playerTwoName == ''){
         playerTwoName = 'Player 2'
     }
 
@@ -147,6 +148,54 @@ function resetGame(){
     updateBoard()
 
     
+
+
+}
+
+
+
+//check if there's a winning pattern
+
+function checkWin(){
+    let playerOneCheck = 'x';
+    let playerTwoCheck = 'o';
+
+    function checkLines(numbers, symbol, playerName){
+        let total = 0
+        for (let i = 0; i < numbers.length; i++){
+            if (board[numbers[i]] == symbol){
+                total += 1;
+            }
+
+        }
+        if (total == 3){
+            alert(playerName + ' has won!')
+        }
+    }
+    //check horizontal
+    checkLines([0,1,2], 'x', PlayerOne.name)
+    checkLines([0,1,2], 'o', PlayerTwo.name)
+
+    checkLines([3,4,5], 'x', PlayerOne.name)
+    checkLines([3,4,5], 'o', PlayerTwo.name)
+
+    checkLines([6,7,8], 'x', PlayerOne.name)
+    checkLines([6,7,8], 'o', PlayerTwo.name)
+    //check vertical
+    checkLines([0,3,6], 'x', PlayerOne.name)
+    checkLines([0,3,6], 'o', PlayerTwo.name)
+
+    checkLines([1,4,7], 'x', PlayerOne.name)
+    checkLines([1,4,7], 'o', PlayerTwo.name)
+
+    checkLines([2,5,8], 'x', PlayerOne.name)
+    checkLines([2,5,8], 'o', PlayerTwo.name)
+    //check diagonal
+    checkLines([0,4,8], 'x', PlayerOne.name)
+    checkLines([0,4,8], 'o', PlayerTwo.name)
+
+    checkLines([2,4,6], 'x', PlayerOne.name)
+    checkLines([2,4,6], 'o', PlayerTwo.name)
 
 
 }
