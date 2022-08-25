@@ -50,6 +50,40 @@ html, body{
 
 }
 
+
+.player{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: gray;
+
+    box-shadow: 0 8px 2px -2px #333 ;
+    border-radius: 10px;
+
+
+    margin: 10vh;
+    padding: 15px;
+}
+
+#startGame{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 10vh;
+    width: 25%;
+}
+
+#startGameButton, #resetGameButton{
+    width: 50%;
+    background-color: gray;
+    color: white;
+    margin: 15px;
+    border-radius: 10px;
+    height: 70px;
+    font-size: 3vh;
+}
+
 .winningCover{
     z-index: 150;
     opacity: 70%;
