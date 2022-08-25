@@ -13,6 +13,7 @@ const boardScreen = document.getElementById('board');
 
 // elements
 const spots = document.querySelectorAll(".element");
+console.log(spots)
 
 //player one input
 let playerOneInput = document.getElementById('playerOneName')
@@ -66,7 +67,7 @@ function updateBoard(){
 //player object
 
 const Player = (name, playerTurn, symbol) => {
-
+    //player move, if clicks on an empty spot it will put it on the board, check win, and switch turn
     const playerMove = (element) =>{
         elementNum = element.id;
         if (board[elementNum] == ''){
@@ -96,13 +97,12 @@ const PlayerTwo = Player('Player 2', true, 'o')
 function startGame(){
     console.log('bruh')
     
-
+    //makes the playerOneName the input
     let playerOneName = playerOneInput.value;
     PlayerOne.name = playerOneName
     let playerTwoName = playerTwoInput.value;
     PlayerTwo.name = playerTwoName
-    console.log(playerOneName)
-    console.log(playerTwoName)
+
 
     if (playerOneName == ''){
         playerOneName = 'Player 1'
@@ -111,10 +111,11 @@ function startGame(){
         playerTwoName = 'Player 2'
     }
 
-
+    //makes the header the name
     playerOneHeader.innerHTML = playerOneName;
     playerTwoHeader.innerHTML = playerTwoName;
 
+    //conditions for gameplay
     gameStart = true
 
     playerOneInput.disabled = true;
@@ -125,6 +126,7 @@ function startGame(){
 }
 
 function resetGame(){
+    //conditions for game reseting
     gameStart = false
     turn = false
     playerOneHeader.innerHTML = 'Player 1'
@@ -140,7 +142,12 @@ function resetGame(){
     playerTwoInput.disabled = false;
 
     startGameButton.disabled = false;
+    
+    boardScreen.replaceChildren(...spots)
+    boardScreen.classList.remove('winningCover')
 
+
+    //clears board
     for (let i = 0; i < board.length; i++){
         board[i] = ''
     };
@@ -157,9 +164,8 @@ function resetGame(){
 //check if there's a winning pattern
 
 function checkWin(){
-    let playerOneCheck = 'x';
-    let playerTwoCheck = 'o';
 
+    //given numbers, will check if all of them match
     function checkLines(numbers, symbol, playerName){
         let total = 0
         for (let i = 0; i < numbers.length; i++){
@@ -169,7 +175,11 @@ function checkWin(){
 
         }
         if (total == 3){
-            alert(playerName + ' has won!')
+            let congratulations = document.createElement('div');
+            congratulations.classList.add('winningText');
+            congratulations.textContent = 'Congratulations! ' + playerName + " has won!"
+            boardScreen.classList.add('winningCover');
+            boardScreen.appendChild(congratulations)
         }
     }
     //check horizontal
@@ -212,10 +222,8 @@ function gameTurn(element){
     if (gameStart == true){
         if (PlayerOne.playerTurn == turn){
             PlayerOne.playerMove(element)
-            console.log(PlayerOne.name)
         }else if (PlayerTwo.playerTurn == turn){
             PlayerTwo.playerMove(element)
-            console.log(PlayerTwo.name)
         }
     //if not, do nothing, dont allow turns
     }else if (gameStart == false){
