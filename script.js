@@ -13,7 +13,6 @@ const boardScreen = document.getElementById('board');
 
 // elements
 const spots = document.querySelectorAll(".element");
-console.log(spots)
 
 //player one input
 let playerOneInput = document.getElementById('playerOneName')
@@ -95,7 +94,6 @@ const PlayerTwo = Player('Player 2', true, 'o')
 
 //initializes game
 function startGame(){
-    console.log('bruh')
     
     //makes the playerOneName the input
     let playerOneName = playerOneInput.value;
