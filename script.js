@@ -73,6 +73,7 @@ const Player = (name, playerTurn, symbol) => {
             board[elementNum] = symbol;
             updateBoard()
             checkWin()
+            checkTie()
             switchTurn()   
         };
 
@@ -97,9 +98,7 @@ function startGame(){
     
     //makes the playerOneName the input
     let playerOneName = playerOneInput.value;
-    PlayerOne.name = playerOneName
     let playerTwoName = playerTwoInput.value;
-    PlayerTwo.name = playerTwoName
 
 
     if (playerOneName == ''){
@@ -108,6 +107,10 @@ function startGame(){
     if (playerTwoName == ''){
         playerTwoName = 'Player 2'
     }
+
+    PlayerOne.name = playerOneName
+
+    PlayerTwo.name = playerTwoName
 
     //makes the header the name
     playerOneHeader.innerHTML = playerOneName;
@@ -157,7 +160,25 @@ function resetGame(){
 
 }
 
+function checkTie(){
+    let count = 0;
+    for (let i = 0; i < board.length; i++){
+        if (board[i] == ''){
+            count += 1
+        }
+    };
+    if (count == 0 && gameStart == true){
+        let tieResult = document.createElement('div');
+        tieResult.classList.add('winningText');
+        tieResult.textContent = "It's a tie!"
+        boardScreen.classList.add('winningCover');
+        boardScreen.appendChild(tieResult)
+        gameStart = false
 
+    }
+
+
+}
 
 //check if there's a winning pattern
 
@@ -178,6 +199,7 @@ function checkWin(){
             congratulations.textContent = 'Congratulations! ' + playerName + " has won!"
             boardScreen.classList.add('winningCover');
             boardScreen.appendChild(congratulations)
+            gameStart = false
         }
     }
     //check horizontal
